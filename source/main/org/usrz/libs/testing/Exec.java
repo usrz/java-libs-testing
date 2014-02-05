@@ -54,7 +54,7 @@ public final class Exec {
         @Override
         public void run() {
             try {
-                IO.copy(input, output);
+                IO.copy(input, output, false);
             } catch (IOException exception) {
                 System.err.println("ERROR: Exception copying standard " + name);
                 exception.printStackTrace(System.err);

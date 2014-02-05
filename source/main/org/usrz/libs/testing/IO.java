@@ -221,13 +221,18 @@ public final class IO {
 
     public static final void copy(InputStream input, OutputStream output)
     throws IOException {
+        copy(input, output, true);
+    }
+
+    public static final void copy(InputStream input, OutputStream output, boolean close)
+    throws IOException {
         final byte[] buffer = new byte[4096];
         int read = -1;
         try {
             while ((read = input.read(buffer)) >= 0)
                 if (read > 0) output.write(buffer, 0, read);
         } finally {
-            try {
+            if (close) try {
                 input.close();
             } finally {
                 output.close();
