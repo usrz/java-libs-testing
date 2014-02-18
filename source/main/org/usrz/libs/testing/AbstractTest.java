@@ -17,9 +17,18 @@ package org.usrz.libs.testing;
 
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
+import org.usrz.libs.logging.Logging;
 
 @Listeners(LoggingTestListener.class)
 public abstract class AbstractTest extends Assert {
+
+    static {
+        try {
+            Logging.init();
+        } catch (Throwable throwable) {
+            /* Simply no logging in the project, ignore */
+        }
+    }
 
     protected AbstractTest() {
         /* Nothing to do */
