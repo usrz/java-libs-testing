@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
 
-  <info organisation="org.usrz.libs" module="testing" revision="0.2.0"/>
+  <info organisation="org.usrz.libs" module="testing" revision="0.2.1"/>
 
   <configurations>
     <conf name="default" visibility="public"/>
-    <conf name="logging" visibility="public"  extends="default"/>
+    <conf name="logging" visibility="public" extends="default"/>
     <conf name="compile" visibility="private" extends="default"/>
     <conf name="testing" visibility="private" extends="compile"/>
   </configurations>
