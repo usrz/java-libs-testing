@@ -16,8 +16,8 @@ dependencies:
         fi
     - ant resolve -Divy.useCacheOnly=false
   cache_directories:
-    - "${HOME}/.ivycache-usrz"
-    - "${JAVA_HOME}"
+    - ~/.ivycache-usrz
+    - ~/jdk1.8.0
 test:
   override:
     - ant test -Divy.useCacheOnly=true
