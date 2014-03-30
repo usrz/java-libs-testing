@@ -25,6 +25,7 @@ public class TestsIOTest extends AbstractTest {
     @Test
     public void testResource()
     throws Exception {
+        log.debug("FOO");
         assertNotNull(IO.resource("foobar.txt"));
     }
 
@@ -32,6 +33,7 @@ public class TestsIOTest extends AbstractTest {
     public void testResourceAnonymousInnerClass()
     throws Exception {
         new Callable<Void>() {
+            @Override
             public Void call()
             throws Exception {
                 assertNotNull(IO.resource("foobar.txt"));
@@ -44,9 +46,11 @@ public class TestsIOTest extends AbstractTest {
     public void testResourceDoubleAnonymousInnerClass()
     throws Exception {
         new Callable<Void>() {
+            @Override
             public Void call()
             throws Exception {
                 return new Callable<Void>() {
+                    @Override
                     public Void call()
                     throws Exception {
                         assertNotNull(IO.resource("foobar.txt"));
@@ -85,6 +89,7 @@ public class TestsIOTest extends AbstractTest {
     /* ====================================================================== */
 
     public static class Inner1 implements Callable<Void> {
+        @Override
         public Void call()
         throws Exception {
             assertNotNull(IO.resource("foobar.txt"));
@@ -95,6 +100,7 @@ public class TestsIOTest extends AbstractTest {
     public static class Inner2 implements Callable<Void> {
 
         public static class Inner implements Callable<Void> {
+            @Override
             public Void call()
             throws Exception {
                 assertNotNull(IO.resource("foobar.txt"));
@@ -102,6 +108,7 @@ public class TestsIOTest extends AbstractTest {
             }
         }
 
+        @Override
         public Void call()
         throws Exception {
             return new Inner().call();
@@ -109,9 +116,11 @@ public class TestsIOTest extends AbstractTest {
     }
 
     public static class Inner3 implements Callable<Void> {
+        @Override
         public Void call()
         throws Exception {
             return new Callable<Void>() {
+                @Override
                 public Void call()
                 throws Exception {
                     assertNotNull(IO.resource("foobar.txt"));

@@ -17,6 +17,7 @@ package org.usrz.libs.testing;
 
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
+import org.usrz.libs.logging.Log;
 import org.usrz.libs.logging.Logging;
 
 @Listeners(LoggingTestListener.class)
@@ -29,6 +30,8 @@ public abstract class AbstractTest extends Assert {
             /* Simply no logging in the project, ignore */
         }
     }
+
+    protected final Log log = new Log(this.getClass());
 
     protected AbstractTest() {
         /* Nothing to do */
