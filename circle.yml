@@ -1,6 +1,6 @@
 machine:
   java:
-    version: oraclejdk8
+    version: oraclejdk7
 checkout:
   post:
     - git submodule sync
