@@ -39,6 +39,7 @@ public final class IO {
     static {
         files = new ArrayList<>();
         Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
             public void run() {
                 for (File file: files) delete(file);
             }
@@ -148,7 +149,10 @@ public final class IO {
 
     public static final byte[] read(File file)
     throws IOException {
-        return read(new FileInputStream(file));
+        final FileInputStream input = new FileInputStream(file);
+        final byte[] bytes = read(input);
+        input.close();
+        return bytes;
     }
 
     public static final byte[] read(URL url)
@@ -174,34 +178,46 @@ public final class IO {
 
     public static final void copy(File file, File outputFile)
     throws IOException {
-        copy(file, new FileOutputStream(outputFile));
+        final FileOutputStream output = new FileOutputStream(outputFile);
+        copy(file, output);
+        output.close();
     }
 
     public static final void copy(URL url, File outputFile)
     throws IOException {
-        copy(url, new FileOutputStream(outputFile));
+        final FileOutputStream output = new FileOutputStream(outputFile);
+        copy(url, output);
+        output.close();
     }
 
     public static final void copy(String resource, File outputFile)
     throws IOException {
-        copy(resource, new FileOutputStream(outputFile));
+        final FileOutputStream output = new FileOutputStream(outputFile);
+        copy(resource, output);
+        output.close();
     }
 
     public static final void copy(byte[] data, File outputFile)
     throws IOException {
-        copy(data, new FileOutputStream(outputFile));
+        final FileOutputStream output = new FileOutputStream(outputFile);
+        copy(data, output);
+        output.close();
     }
 
     public static final void copy(InputStream input, File outputFile)
     throws IOException {
-        copy(input, new FileOutputStream(outputFile));
+        final FileOutputStream output = new FileOutputStream(outputFile);
+        copy(input, output);
+        output.close();
     }
 
     /* ====================================================================== */
 
     public static final void copy(File file, OutputStream output)
     throws IOException {
-        copy(new FileInputStream(file), output);
+        final FileInputStream input = new FileInputStream(file);
+        copy(input, output);
+        input.close();
     }
 
     public static final void copy(URL url, OutputStream output)
@@ -256,7 +272,10 @@ public final class IO {
 
     public static final File copyTempFile(File file, String prefix, String suffix)
     throws IOException {
-        return copyTempFile(new FileInputStream(file), prefix, suffix);
+        final FileInputStream input = new FileInputStream(file);
+        final File tempFile = copyTempFile(input, prefix, suffix);
+        input.close();
+        return tempFile;
     }
 
     /* ====================================================================== */
@@ -325,7 +344,9 @@ public final class IO {
     public static final File copyTempFile(InputStream input, String prefix, String suffix)
     throws IOException {
         final File file = makeTempFile(prefix, suffix);
-        copy(input, new FileOutputStream(file));
+        final FileOutputStream output = new FileOutputStream(file);
+        copy(input, output);
+        output.close();
         return file;
     }
 
