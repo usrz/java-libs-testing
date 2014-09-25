@@ -37,4 +37,20 @@ public abstract class AbstractTest extends Assert {
         /* Nothing to do */
     }
 
+    /* ====================================================================== */
+
+    public static final void assertException(Runnable runnable, Class<? extends Exception> exceptionType) {
+        assertException(runnable, exceptionType, null);
+    }
+
+    public static final void assertException(Runnable runnable, Class<? extends Exception> exceptionType, String message) {
+        try {
+            runnable.run();
+        } catch (Throwable t) {
+            assertTrue(exceptionType.isInstance(t), "Expected " + exceptionType.getSimpleName() + " but thrown " + t.getClass().getSimpleName());
+            if (message != null) assertEquals(t.getMessage(), message, "Wrong exception message");
+            return;
+        }
+        fail(exceptionType.getSimpleName() + " not thrown");
+    }
 }
